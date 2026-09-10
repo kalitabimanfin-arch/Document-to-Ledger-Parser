@@ -1,3 +1,8 @@
+## 🚀 Live Demo
+**[Click here to try the live app!](https://document-to-ledger-parser-3tagp2tnfbbcmmqleghwvo.streamlit.app/)**
+
+Upload a messy CSV, click "Clean My Data," and download files ready for QuickBooks or Xero.
+
 # 📄 Document-to-Ledger Parser
 
 **AI-powered tool that standardizes messy client invoices and bank statements for QuickBooks/Xero import.**
