@@ -7,7 +7,7 @@
 ## 🎯 The Problem
 
 Every client sends data in different formats:
-- Dates as `DD/MM/YYYY` or `Jan 15 2025` or `01-15-2025`
+- Dates as `15-01-2025` or `Jan 15 2025`
 - Debits and credits in separate columns
 - Different column names for the same data
 
@@ -17,7 +17,7 @@ Accountants waste hours manually reformatting before importing into QuickBooks o
 
 ## 💡 The Solution
 
-This Python tool:
+This tool:
 1. Reads messy CSV files from any client
 2. Normalizes dates, amounts, and column names
 3. Exports clean files ready for QuickBooks or Xero import
@@ -46,32 +46,16 @@ This Python tool:
 | `messy_invoice.csv` | Sample client invoices (input) |
 | `quickbooks_ready.csv` | Output for QuickBooks import |
 | `xero_ready.csv` | Output for Xero import |
+| `requirements.txt` | Python dependencies |
 
 ---
 
 ## 🚀 How to Run
 
-```bash
-python parser.py
+**Prerequisites:** Python 3.x installed
 
-
-Scroll down → Commit message: `Updated README with project details` → Click **"Commit changes"**
-
----
-
-## ✅ You're Done!
-
-**Your 3 portfolios:**
-1. [AAPL Financial Analysis](https://github.com/kalitabimanfin-arch/AAPL-Financial-Analysis-Portfolio)
-2. [Accounting Automation](https://github.com/kalitabimanfin-arch/Accounting-Automation-Portfolio)
-3. [Document-to-Ledger Parser](https://github.com/kalitabimanfin-arch/Document-to-Ledger-Parser)
-
----
-
-## 🗣️ Interview Line (If They Ask About Project #3)
-
-> *"I identified a real pain point: accountants waste hours reformatting client data for QuickBooks. I built a Python parser that reads messy CSVs, normalizes the dates and amounts, and exports clean import-ready files. It's a prototype, but it proves the concept. I plan to add PDF parsing using AI vision models next."*
-
----
-
-**Now go run the script and upload. You have time. Let's go!** 🚀
+1. Clone this repository:
+   ```bash
+   git clone https://github.com/kalitabimanfin-arch/Document-to-Ledger-Parser.git
+   pip install -r requirements.txt
+   python parser.py
