@@ -206,27 +206,25 @@ if uploaded_file is not None:
         # =============================================
         # BUILD CLEAN DATAFRAME (Preserve ALL original columns)
         # =============================================
-
-        # Columns we used for detection (won't be duplicated)
         used_cols = [date_col, desc_col, debit_col, credit_col, amount_col]
         used_cols = [c for c in used_cols if c is not None]
 
-        # Extra columns to preserve (Currency, Reference, Transaction Type, etc.)
         extra_cols = [c for c in messy.columns if c not in used_cols and not c.startswith('_clean_')]
 
-        # Start with the clean core columns
         clean = pd.DataFrame({
             'Date': messy['_clean_date'],
             'Description': messy['_clean_desc'],
             'Amount': messy['_clean_amount']
         })
 
-        # Append all extra columns (preserved as-is)
         for col in extra_cols:
             clean[col] = messy[col].values
 
         # Drop rows where date parsing failed
         clean = clean.dropna(subset=['Date'])
+
+        # Auto-sort by date (oldest to newest)
+        clean = clean.sort_values('Date').reset_index(drop=True)
 
         st.subheader("✅ Your Clean Data")
         st.dataframe(clean)
@@ -235,12 +233,13 @@ if uploaded_file is not None:
         st.markdown("---")
         st.subheader("📥 Download Your Files")
 
-        # Safe date conversion helper
+        # Safe date conversion for QuickBooks
         clean['_qb_date'] = pd.to_datetime(clean['Date'], errors='coerce')
         qb = clean.dropna(subset=['_qb_date']).copy()
         qb['Date'] = qb['_qb_date'].dt.strftime('%m/%d/%Y')
         qb = qb.drop(columns=['_qb_date'])
 
+        # Safe date conversion for Xero
         clean['_xero_date'] = pd.to_datetime(clean['Date'], errors='coerce')
         xero = clean.dropna(subset=['_xero_date']).copy()
         xero['Date'] = xero['_xero_date'].dt.strftime('%d/%m/%Y')
